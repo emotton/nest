@@ -8,3 +8,5 @@ yarn add @nestjs-modules/mailer nodemailer
 yarn add @types/nodemailer -D
 
 yarn add @nestjs/config
+
+yarn add bull-board

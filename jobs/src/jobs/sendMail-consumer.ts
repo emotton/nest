@@ -1,5 +1,5 @@
 import { MailerService } from "@nestjs-modules/mailer";
-import { Process, Processor } from "@nestjs/bull";
+import { OnQueueActive, OnQueueProgress, OnQueueCompleted, Process, Processor } from "@nestjs/bull";
 import { Job } from "bull";
 import { CreateUserDTO } from "src/create-user/create-user-dto";
 
@@ -17,6 +17,16 @@ class SendMailConsumer {
             subject: "Seja bem vindo(a)!",
             text: `Olá ${data.name}, seu cadastro foi realizado com sucesso !`
         });
+    }
+
+    @OnQueueActive()
+    onQueueActive(job: Job){
+        console.log(`On Active ${job.name} - email: ${job.data.email}`);
+    }
+
+    @OnQueueCompleted()
+    onQueueCompleted(job: Job){
+        console.log(`On Completed ${job.name} - email: ${job.data.email}`);
     }
 }
 
