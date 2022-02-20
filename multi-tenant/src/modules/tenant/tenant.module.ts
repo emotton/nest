@@ -48,12 +48,12 @@ export class TenantModule {
         }
 
         try {
-          getConnection(tenant.name);
+          getConnection(tenant.dbname);
           next();
         } catch (e) {
 
           const createdConnection: Connection = await createConnection({
-            name: tenant.name,
+            name: tenant.dbname,
             type: "postgres",
             host: "localhost",
             port: 5432,
