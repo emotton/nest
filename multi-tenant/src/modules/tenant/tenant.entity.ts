@@ -10,4 +10,7 @@ export class Tenant {
   @Column()
   name: string;
 
+  @Column({default:""})
+  dbname: string;
+
 }

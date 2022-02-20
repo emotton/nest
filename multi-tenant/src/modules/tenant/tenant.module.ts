@@ -22,7 +22,8 @@ export const TENANT_CONNECTION = 'TENANT_CONNECTION';
       scope: Scope.REQUEST,
       useFactory: async (request, connection) => {
         const tenant: Tenant = await connection.getRepository(Tenant).findOne(({ where: { host: request.headers.host } }));
-        return getConnection(tenant.name);
+        console.log(tenant);
+        return getConnection(tenant.dbname);
       }
     }
   ],
@@ -58,7 +59,7 @@ export class TenantModule {
             port: 5432,
             username: 'postgres',
             password: 'numsey',
-            database: tenant.name,
+            database: tenant.dbname,
             entities: [ Api ],
             synchronize: true,
           })
